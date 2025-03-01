@@ -124,9 +124,3 @@ Below is a brief overview of the available endpoints and what you can do with th
 - **DELETE** `/api/media/:id`  
   Delete the specified media from the server.
 
----
-
-## Database Usage (Optional)
-
-By default, this script is set up to use a database (e.g., MariaDB) to store media metadata, track views, and enable more complex features. However, **the database is not strictly required**. You can remove or adapt the database logic if you just need simple file hosting and do not require metadata storage. Keep in mind that removing the database integration will disable some advanced functionality (like tracking views or listing all uploads).
-
