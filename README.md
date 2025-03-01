@@ -38,6 +38,11 @@
 
        npm run start
 
+6. **Test it with**:
+
+       curl -F "file=@C:\Users\anonymous\Documents\fivemhosting\testdata\LHWnL8vLu1lY.png CHANGE ME" -H "x-api-key: GSFAF9851GHC CHANGE ME" http://localhost:3000/api/media/upload
+
+
 > **Tip**: A reverse proxy is recommended to hide the API key.
 
 ---
