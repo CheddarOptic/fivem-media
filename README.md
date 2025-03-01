@@ -1,99 +1,132 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# FiveM Media Hoster
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+**Made for [LB-Phone](https://lbscripts.com/)** but can be used for other purposes as well!
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+> **Note**: LB Scripts does **not** provide support for this script.  
+> If you need help, please contact me but only if you are a dev.  
+> **Discord**: `captainchrizzle.`
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Requirements
 
-## Project setup
+- **Node.js v20+**
+- **MariaDB** (or similar)
 
-```bash
-$ npm install
-```
+---
 
-## Compile and run the project
+## Installation
 
-```bash
-# development
-$ npm run start
+1. **Clone the repository**:
 
-# watch mode
-$ npm run start:dev
+       git clone https://github.com/EGOistentum/fivem-media
 
-# production mode
-$ npm run start:prod
-```
+2. **Navigate into the directory**:
 
-## Run tests
+       cd fivem-media
 
-```bash
-# unit tests
-$ npm run test
+3. **Install dependencies**:
 
-# e2e tests
-$ npm run test:e2e
+       npm i
 
-# test coverage
-$ npm run test:cov
-```
+4. **Rename `.env.example` to `.env`** and fill in your data:
 
-## Deployment
+       mv .env.example .env
+       # Edit the .env file to configure your DB, API key, etc.
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+5. **Run the script**:
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+       npm run start
 
-```bash
-$ npm install -g mau
-$ mau deploy
-```
+> **Tip**: A reverse proxy is recommended to hide the API key.
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+---
 
-## Resources
+## LB-Phone Integration
 
-Check out a few resources that may come in handy when working with NestJS:
+If you want to use this script with **LB-Phone**, edit `shared -> upload.lua` in your LB-Phone resource to match the following structure:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+    Custom = {
+        Video = {
+            url = "https://your-url.com/api/media/upload",
+            field = "file",
+            headers = {
+                ["x-api-key"] = "96df0227a978"
+            },
+            error = {
+                path = "success",
+                value = false
+            },
+            success = {
+                path = "media.url"
+            },
+        },
+        Image = {
+            url = "https://your-url.com/api/media/upload",
+            field = "file",
+            headers = {
+                ["x-api-key"] = "96df0227a978"
+            },
+            error = {
+                path = "success",
+                value = false
+            },
+            success = {
+                path = "media.url"
+            },
+        },
+        Audio = {
+            url = "https://your-url.com/api/media/upload",
+            field = "file",
+            headers = {
+                ["x-api-key"] = "96df0227a978"
+            },
+            error = {
+                path = "success",
+                value = false
+            },
+            success = {
+                path = "media.url"
+            },
+        },
+    }
 
-## Support
+Replace:
+- `https://your-url.com` with your actual domain.
+- `96df0227a978` with the actual API key you set in your `.env`.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+---
 
-## Stay in touch
+## What You Can Do With It
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- **Upload and Host Media** (images, videos, audio) for your FiveM server.
+- **Use with LB-Phone** to handle in-game media sending/sharing/upload.
+- **Protect Uploads** with an API key.
+- **Store and Retrieve Media Info** from a database (e.g., MariaDB).
+- **Extend or Customize** for other scripts that need media hosting.
 
-## License
+# API Endpoints
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Below is a brief overview of the available endpoints and what you can do with them:
+
+- **POST** `/api/media/upload`  
+  Upload a file (image, video, or audio). Returns file information, including a URL and direct link.
+
+- **GET** `/api/media`  
+  Retrieve a list of all uploaded media with their respective URLs.
+
+- **GET** `/api/media/:id`  
+  Redirect to the actual file associated with the specified media ID (e.g., `:id`).
+
+- **GET** `/api/media/info/:id`  
+  Fetch detailed information (metadata, direct link, etc.) for a specific media entry.
+
+- **DELETE** `/api/media/:id`  
+  Delete the specified media from the server.
+
+---
+
+## Database Usage (Optional)
+
+By default, this script is set up to use a database (e.g., MariaDB) to store media metadata, track views, and enable more complex features. However, **the database is not strictly required**. You can remove or adapt the database logic if you just need simple file hosting and do not require metadata storage. Keep in mind that removing the database integration will disable some advanced functionality (like tracking views or listing all uploads).
+
