@@ -7,9 +7,12 @@ import * as fs from 'fs';
 
 async function bootstrap() {
 
+  const privkey = process.env.PRIVKEY;
+  const fullchain = process.env.FULLCHAIN;
+
   const httpsOptions = {
-    key: fs.readFileSync('/etc/letsencrypt/live/2ndliferp.com/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/2ndliferp.com/fullchain.pem'),
+    key: fs.readFileSync(`${privkey}`),
+    cert: fs.readFileSync(`${fullchain}`),
   };
 
   const app = await NestFactory.create(AppModule, { httpsOptions });
@@ -18,7 +21,7 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalGuards(new ApiKeyAuthGuard());
-  
+
   await app.listen(port);
 
 
